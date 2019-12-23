@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.List;
 
-public class CsvUtils{
+public class CsvUtils {
 
     private static final char DEFAULT_SEPARATOR = ',';
 
@@ -23,13 +23,11 @@ public class CsvUtils{
             result = result.replace("\"", "\"\"");
         }
         return result;
-
     }
 
     public static void writeLine(Writer w, List<String> values, char separators, char customQuote) throws IOException {
 
         boolean first = true;
-
 
         if (separators == ' ') {
             separators = DEFAULT_SEPARATOR;

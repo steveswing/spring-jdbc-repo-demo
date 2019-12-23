@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.domain.Voucher;
 
-@Repository("voucherRepository")
+@Repository
 public interface VoucherRepository extends org.springframework.data.repository.Repository<Voucher, String> {
     @Query("SELECT A.ORIGIN, A.VCHR_SRC, B.NAME1, B.VENDOR_ID, A.BUSINESS_UNIT_GL, A.INVOICE_ID, A.VOUCHER_ID, A.PO_ID, A.PYMNT_TERMS_CD, A.DSCNT_AMT_FLG, D.PYMNT_ID, D.PYMNT_ID_REF, D" +
             ".PYMNT_METHOD, SUM(A.GROSS_AMT), A.DSCNT_AMT, TRUNC(A.RECEIPT_DT), TRUNC(A.INVOICE_DT), TRUNC(A.DUE_DT), TRUNC(A.DSCNT_DUE_DT), TRUNC(A.ENTERED_DT), TRUNC(CAST((A.APPROVAL_DTTM) AS " +
@@ -16,7 +16,7 @@ public interface VoucherRepository extends org.springframework.data.repository.R
             "AND D.BANK_SETID = C.BANK_SETID AND D.BANK_CD = C.BANK_CD AND D.BANK_ACCT_KEY = C.BANK_ACCT_KEY AND D.PYMNT_ID = C.PYMNT_ID)GROUP BY A.ORIGIN, A.VCHR_SRC, B.NAME1, B.VENDOR_ID, A" +
             ".BUSINESS_UNIT_GL, A.INVOICE_ID, A.VOUCHER_ID, A.PO_ID, A.PYMNT_TERMS_CD, A.DSCNT_AMT_FLG, D.PYMNT_ID, D.PYMNT_ID_REF, D.PYMNT_METHOD, A.DSCNT_AMT, TRUNC(A.RECEIPT_DT), TRUNC(A" +
             ".INVOICE_DT), TRUNC(A.DUE_DT), TRUNC(A.DSCNT_DUE_DT), TRUNC(A.ENTERED_DT), TRUNC(CAST((A.APPROVAL_DTTM) AS TIMESTAMP)), TRUNC(D.PYMNT_DT)")
-    List<Voucher> findAllUnpaid();
+    List<Voucher> fetchUnpaid();
 
     @Query("SELECT A.BUSINESS_UNIT, A.VOUCHER_ID, A.INVOICE_ID, A.INVOICE_DT, A.GROSS_AMT, B.REMIT_VENDOR, C.NAME1, B.SCHEDULED_PAY_DT, B.REMIT_ADDR_SEQ_NUM, " +
             "    B.PYMNT_METHOD, B.PYMNT_HOLD, A.ORIGIN, A.POST_STATUS_AP, A.PROCESS_MAN_CLOSE, A.DUE_DT, A.DSCNT_DUE_DT, A.ENTERED_DT, " +
@@ -27,5 +27,5 @@ public interface VoucherRepository extends org.springframework.data.repository.R
             "WHERE (A.BUSINESS_UNIT = A1.BUSINESS_UNIT AND A1.OPRCLASS = 'PPSSAL01' AND B.BUSINESS_UNIT = B1.BUSINESS_UNIT AND B1.OPRCLASS = 'PPSSAL01' " +
             "    AND (A.BUSINESS_UNIT = B.BUSINESS_UNIT AND A.VOUCHER_ID = B.VOUCHER_ID AND A.CLOSE_STATUS <> 'C' AND A.ENTRY_STATUS <> 'X' " +
             "        AND B.PYMNT_SELCT_STATUS = 'N' AND C.VENDOR_ID = A.VENDOR_ID AND A.PROCESS_MAN_CLOSE <> 'Y' AND A.ENTERED_DT < TO_DATE(CURRENT_DATE, 'YYYY-MM-DD')))")
-    List<Voucher> findAllPaid();
+    List<Voucher> fetchPaid();
 }

@@ -39,14 +39,13 @@ public class VoucherController {
 
     @GetMapping("/all-paid")
     public Iterable<Voucher> allPaidVouchers() {
-        return voucherRepository.findAllPaid();
+        return voucherRepository.fetchPaid();
     }
 
     @GetMapping("/all-unpaid")
     public Iterable<Voucher> allUnpaidVouchers() {
-        return voucherRepository.findAllUnpaid();
+        return voucherRepository.fetchUnpaid();
     }
-
 
     @PostMapping("/request-vouchers")
     @ResponseBody
@@ -55,7 +54,7 @@ public class VoucherController {
         try {
             log.info("Gathering Multiple Voucher Information");
 
-            List<Voucher> vouchers = voucherRepository.findAllUnpaid().stream().filter(request::matches).collect(Collectors.toList());
+            List<Voucher> vouchers = voucherRepository.fetchUnpaid().stream().filter(request::matches).collect(Collectors.toList());
 
             CsvWriter csvWriter = new CsvWriter();
             Path attachment = csvWriter.writeDataToCsv(vouchers);
