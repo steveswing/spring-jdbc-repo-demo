@@ -3,13 +3,12 @@ package com.example.demo.data;
 import java.util.List;
 
 import org.springframework.data.jdbc.repository.query.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.domain.Voucher;
 
 @Repository
-public interface VoucherRepository extends CrudRepository<Voucher, String> {
+public interface VoucherRepository extends org.springframework.data.repository.Repository<Voucher, String> {
     @Query("SELECT A.ORIGIN, A.VCHR_SRC, B.NAME1, B.VENDOR_ID, A.BUSINESS_UNIT_GL, A.INVOICE_ID, A.VOUCHER_ID, A.PO_ID, A.PYMNT_TERMS_CD, A.DSCNT_AMT_FLG, D.PYMNT_ID, D.PYMNT_ID_REF, D" +
             ".PYMNT_METHOD, SUM(A.GROSS_AMT), A.DSCNT_AMT, TRUNC(A.RECEIPT_DT), TRUNC(A.INVOICE_DT), TRUNC(A.DUE_DT), TRUNC(A.DSCNT_DUE_DT), TRUNC(A.ENTERED_DT), TRUNC(CAST((A.APPROVAL_DTTM) AS " +
             "TIMESTAMP)), TRUNC(D.PYMNT_DT) FROM PS_VOUCHER A, PS_SP_BU_AP_CLSVW A1, PS_VENDOR B, PS_PYMNT_VCHR_XREF C, PS_Z_PAYMENT_VW D WHERE A.BUSINESS_UNIT = A1.BUSINESS_UNIT AND A1.OPRCLASS = " +
