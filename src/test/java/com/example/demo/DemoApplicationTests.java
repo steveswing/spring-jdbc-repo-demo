@@ -7,7 +7,7 @@ import com.example.demo.config.H2TestProfileJPAConfig;
 import com.example.demo.config.TestEmailConfig;
 
 @SpringBootTest(classes = {TestEmailConfig.class, H2TestProfileJPAConfig.class, DemoApplication.class})
-class DemoApplicationTests {
+public class DemoApplicationTests {
 
     @Test
     void contextLoads() {
