@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -31,8 +30,7 @@ public class VoucherController {
 
     private final VoucherRepository voucherRepository;
 
-    @Autowired
-    public VoucherController(@Qualifier("voucherRepository") VoucherRepository voucherRepository) {
+    public VoucherController(VoucherRepository voucherRepository) {
         this.voucherRepository = voucherRepository;
     }
 
@@ -41,14 +39,13 @@ public class VoucherController {
 
     @GetMapping("/all-paid")
     public Iterable<Voucher> allPaidVouchers() {
-        return voucherRepository.findAllPaid();
+        return voucherRepository.fetchPaid();
     }
 
     @GetMapping("/all-unpaid")
     public Iterable<Voucher> allUnpaidVouchers() {
-        return voucherRepository.findAllUnpaid();
+        return voucherRepository.fetchUnpaid();
     }
-
 
     @PostMapping("/request-vouchers")
     @ResponseBody
@@ -57,7 +54,7 @@ public class VoucherController {
         try {
             log.info("Gathering Multiple Voucher Information");
 
-            List<Voucher> vouchers = voucherRepository.findAllUnpaid().stream().filter(request::matches).collect(Collectors.toList());
+            List<Voucher> vouchers = voucherRepository.fetchUnpaid().stream().filter(request::matches).collect(Collectors.toList());
 
             CsvWriter csvWriter = new CsvWriter();
             Path attachment = csvWriter.writeDataToCsv(vouchers);
