@@ -8,8 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.domain.Voucher;
 
-import javax.transaction.Transactional;
-
 @Repository
 public interface VoucherRepository extends CrudRepository<Voucher, String> {
     @Query("SELECT A.ORIGIN, A.VCHR_SRC, B.NAME1, B.VENDOR_ID, A.BUSINESS_UNIT_GL, A.INVOICE_ID, A.VOUCHER_ID, A.PO_ID, A.PYMNT_TERMS_CD, A.DSCNT_AMT_FLG, D.PYMNT_ID, D.PYMNT_ID_REF, D" +

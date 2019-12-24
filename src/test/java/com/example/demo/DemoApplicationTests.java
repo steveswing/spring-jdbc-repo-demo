@@ -1,14 +1,15 @@
 package com.example.demo;
 
-import com.example.demo.config.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import com.example.demo.config.H2TestProfileJPAConfig;
+import com.example.demo.config.TestEmailConfig;
 
 @SpringBootTest(classes = {TestEmailConfig.class, H2TestProfileJPAConfig.class, DemoApplication.class})
 public class DemoApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
-
+    @Test
+    void contextLoads() {
+    }
 }

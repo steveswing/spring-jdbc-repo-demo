@@ -2,20 +2,15 @@ package com.example.demo.data;
 
 import java.util.List;
 
-import com.example.demo.DemoApplication;
-import com.example.demo.config.*;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.test.autoconfigure.jdbc.JdbcTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.*;
-import org.springframework.data.jdbc.repository.config.EnableJdbcRepositories;
+import org.springframework.context.annotation.Import;
 
+import com.example.demo.config.H2TestProfileJPAConfig;
+import com.example.demo.config.PersistenceConfig;
 import com.example.demo.domain.Voucher;
-import org.springframework.test.context.ActiveProfiles;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
