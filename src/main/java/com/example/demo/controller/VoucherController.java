@@ -31,8 +31,7 @@ public class VoucherController {
 
     private final VoucherRepository voucherRepository;
 
-    @Autowired
-    public VoucherController(@Qualifier("voucherRepository") VoucherRepository voucherRepository) {
+    public VoucherController(VoucherRepository voucherRepository) {
         this.voucherRepository = voucherRepository;
     }
 
@@ -41,12 +40,14 @@ public class VoucherController {
 
     @GetMapping("/all-paid")
     public Iterable<Voucher> allPaidVouchers() {
-        return voucherRepository.findAllPaid();
+//        return voucherRepository.findAllPaid();
+        return null;
     }
 
     @GetMapping("/all-unpaid")
     public Iterable<Voucher> allUnpaidVouchers() {
-        return voucherRepository.findAllUnpaid();
+//        return voucherRepository.findAllUnpaid();
+        return null;
     }
 
 

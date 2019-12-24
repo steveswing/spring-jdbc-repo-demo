@@ -14,19 +14,11 @@ import com.example.demo.util.EmailService;
 import static org.mockito.Mockito.mock;
 
 @Configuration
-@ActiveProfiles("test")
-@Primary
-@ComponentScan(basePackages = {"com.example.demo"})
 public class TestEmailConfig {
     @Bean
-    @Profile("test")
+    @Primary
     public JavaMailSender javaMailSender() {
         return mock(JavaMailSender.class);
     }
 
-    @Bean
-    @Profile("test")
-    public EmailService emailService() {
-        return mock(EmailService.class);
-    }
 }
