@@ -12,7 +12,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jdbc.repository.config.EnableJdbcRepositories;
 
-import com.example.demo.config.H2TestProfileJPAConfig;
+import com.example.demo.config.H2TestProfileJdbcConfig;
 import com.example.demo.config.TestEmailConfig;
 import com.example.demo.domain.Voucher;
 
@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @JdbcTest
 @EnableJdbcRepositories
-@ComponentScan(basePackages = {"com.example.demo"}, basePackageClasses = {TestEmailConfig.class, H2TestProfileJPAConfig.class})
+@ComponentScan(basePackages = {"com.example.demo"}, basePackageClasses = {TestEmailConfig.class, H2TestProfileJdbcConfig.class})
 class VoucherRepositoryTest {
 
     @Qualifier("voucherRepository")
@@ -42,7 +42,7 @@ class VoucherRepositoryTest {
     void findAllUnpaid() {
         assertNotNull(subject, "expected non-null subject");
 
-        final List<Voucher> allUnpaid = subject.findAllUnpaid();
+        final List<Voucher> allUnpaid = subject.fetchUnpaid();
         assertNotNull(allUnpaid, "expected non-null value");
     }
 
@@ -50,7 +50,7 @@ class VoucherRepositoryTest {
     void findAllPaid() {
         assertNotNull(subject, "expected non-null subject");
 
-        final List<Voucher> allPaid = subject.findAllPaid();
+        final List<Voucher> allPaid = subject.fetchPaid();
         assertNotNull(allPaid, "expected non-null value");
     }
 }
