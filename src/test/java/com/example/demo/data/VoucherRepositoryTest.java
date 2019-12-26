@@ -8,14 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 
-import com.example.demo.config.H2TestProfileJPAConfig;
+import com.example.demo.config.H2TestProfileJdbcConfig;
 import com.example.demo.config.PersistenceConfig;
 import com.example.demo.domain.Voucher;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest()
-@Import({H2TestProfileJPAConfig.class, PersistenceConfig.class})
+@Import({H2TestProfileJdbcConfig.class, PersistenceConfig.class})
 class VoucherRepositoryTest {
 
     @Autowired
