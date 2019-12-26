@@ -1,8 +1,7 @@
- package com.example.demo.domain;
+package com.example.demo.domain;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.Currency;
 import java.util.Date;
 
 import org.springframework.data.annotation.AccessType;
