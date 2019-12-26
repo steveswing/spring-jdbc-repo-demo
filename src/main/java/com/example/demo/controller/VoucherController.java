@@ -56,7 +56,7 @@ public class VoucherController {
         try {
             log.info("Gathering Multiple Voucher Information");
 
-            List<Voucher> vouchers = voucherRepository.findAllUnpaid().stream().filter(request::matches).collect(Collectors.toList());
+            List<Voucher> vouchers = voucherRepository.fetchUnpaid().stream().filter(request::matches).collect(Collectors.toList());
 
             CsvWriter csvWriter = new CsvWriter();
             Path attachment = csvWriter.writeDataToCsv(vouchers);

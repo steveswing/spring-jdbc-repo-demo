@@ -38,7 +38,7 @@ class VoucherRepositoryTest {
     void findAllUnpaid() {
         assertNotNull(subject, "expected non-null subject");
 
-        final List<Voucher> allUnpaid = subject.findAllUnpaid();
+        final List<Voucher> allUnpaid = subject.fetchUnpaid();
         assertNotNull(allUnpaid, "expected non-null value");
     }
 
@@ -46,7 +46,7 @@ class VoucherRepositoryTest {
     void findAllPaid() {
         assertNotNull(subject, "expected non-null subject");
 
-        final List<Voucher> allPaid = subject.findAllPaid();
+        final List<Voucher> allPaid = subject.fetchPaid();
         assertNotNull(allPaid, "expected non-null value");
     }
 }
