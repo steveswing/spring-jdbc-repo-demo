@@ -41,7 +41,6 @@ public class H2TestProfileJdbcConfig extends AbstractJdbcConfiguration {
     JdbcRepositoryFactory repositoryFactory() {
         final JdbcMappingContext mappingContext = new JdbcMappingContext(NamingStrategy.INSTANCE);
         final ApplicationEventPublisher publisher = new AnnotationConfigApplicationContext();
-        final NamedParameterJdbcOperations operations = new NamedParameterJdbcTemplate(dataSource());
         final JdbcConverter converter = new BasicJdbcConverter(mappingContext, null);
         final DataAccessStrategy dataAccessStrategy = new DefaultDataAccessStrategy(new SqlGeneratorSource(mappingContext), mappingContext, converter, operations());
         return new JdbcRepositoryFactory(dataAccessStrategy, mappingContext, converter, publisher, operations());
