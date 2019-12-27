@@ -5,10 +5,8 @@ import javax.sql.DataSource;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Profile;
 import org.springframework.data.jdbc.core.convert.BasicJdbcConverter;
 import org.springframework.data.jdbc.core.convert.DataAccessStrategy;
 import org.springframework.data.jdbc.core.convert.DefaultDataAccessStrategy;
@@ -16,24 +14,16 @@ import org.springframework.data.jdbc.core.convert.JdbcConverter;
 import org.springframework.data.jdbc.core.convert.SqlGeneratorSource;
 import org.springframework.data.jdbc.core.mapping.JdbcMappingContext;
 import org.springframework.data.jdbc.repository.config.AbstractJdbcConfiguration;
-import org.springframework.data.jdbc.repository.config.EnableJdbcRepositories;
 import org.springframework.data.jdbc.repository.support.JdbcRepositoryFactory;
 import org.springframework.data.relational.core.mapping.NamingStrategy;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.example.demo.data.VoucherRepository;
 
 @Configuration
-@EnableTransactionManagement
-@ActiveProfiles("test")
-@Primary
-@EnableJdbcRepositories(basePackages = {"com.example.demo"})
-@ComponentScan(basePackages = {"com.example.demo"}, basePackageClasses = {TestEmailConfig.class, H2TestProfileJdbcConfig.class})
 public class H2TestProfileJdbcConfig extends AbstractJdbcConfiguration {
     @Bean
     NamedParameterJdbcOperations operations() {
@@ -41,7 +31,7 @@ public class H2TestProfileJdbcConfig extends AbstractJdbcConfiguration {
     }
 
     @Bean
-    @Profile("test")
+    @Primary
     public DataSource dataSource() {
         return new EmbeddedDatabaseBuilder().generateUniqueName(true).setType(EmbeddedDatabaseType.H2).addScript("create-voucher-test-schema.sql").build();
 //        return DataSourceBuilder.create().driverClassName("org.h2.Driver").url("jdbc:h2:mem:db;DB_CLOSE_DELAY=-1").username("sa").password("").build();

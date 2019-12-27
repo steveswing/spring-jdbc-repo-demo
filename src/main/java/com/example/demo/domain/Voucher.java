@@ -1,24 +1,27 @@
 package com.example.demo.domain;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.Currency;
 import java.util.Date;
 
+import org.springframework.data.annotation.AccessType;
+import org.springframework.data.annotation.AccessType.Type;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
+@AccessType(Type.PROPERTY)
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
+@Table
 public class Voucher {
     @Id
     @Column("VOUCHER_ID")
     String voucherId;
-
     @Column("BUSINESS_UNIT")
     String businessUnit;
     @Column("INVOICE_ID")
@@ -26,7 +29,7 @@ public class Voucher {
     @Column("INVOICE_DT")
     Date invoiceDate;
     @Column("GROSS_AMT")
-    Currency grossAmt;
+    BigDecimal grossAmt;
     @Column("REMIT_VENDOR")
     String remitVendor;
     @Column("NAME1")
@@ -68,7 +71,7 @@ public class Voucher {
     @Column("Z_WF_EAPVL_SENT")
     String zWf_EAPVLSent;
     @Column("Z_WF_APV_SENT_DT")
-    String zWfApprovalSentDate;
+    Date zwfapprovalsentdate;
     @Column("SHIPTO_ID")
     String shipYoId;
     @Column("ERROR_FLAG")
@@ -76,7 +79,7 @@ public class Voucher {
     @Column("PYMNT_HOLD_REASON")
     String paymentHoldReason;
     @Column("Z_WF_APRVL_TYPE")
-    String zWfApprovalType;
+    String zwfapprovaltype;
     @Column("VCHR_SRC")
     String voucherSource;
     @Column("MATCH_ACTION")
