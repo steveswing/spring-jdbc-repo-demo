@@ -39,14 +39,12 @@ public class VoucherController {
 
     @GetMapping("/all-paid")
     public Iterable<Voucher> allPaidVouchers() {
-//        return voucherRepository.findAllPaid();
-        return null;
+        return voucherRepository.fetchPaid();
     }
 
     @GetMapping("/all-unpaid")
     public Iterable<Voucher> allUnpaidVouchers() {
-//        return voucherRepository.findAllUnpaid();
-        return null;
+        return voucherRepository.fetchUnpaid();
     }
 
     @PostMapping("/request-vouchers")

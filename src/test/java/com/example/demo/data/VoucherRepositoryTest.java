@@ -14,21 +14,12 @@ import com.example.demo.domain.Voucher;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@SpringBootTest()
+@SpringBootTest
 @Import({H2TestProfileJdbcConfig.class, PersistenceConfig.class})
 class VoucherRepositoryTest {
 
     @Autowired
     VoucherRepository subject;
-
-    /*
-    @BeforeAll
-    static void init() {
-        final AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
-        ctx.scan("com.example.demo");
-        ctx.refresh();
-    }
-     */
 
     @BeforeEach
     void setUp() {
